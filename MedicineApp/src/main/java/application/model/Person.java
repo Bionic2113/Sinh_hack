@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "people")
@@ -29,4 +31,7 @@ public class Person {
     @Column(name = "SEX")
     private String sex;
 
+    @OneToMany
+    @JoinColumn(name = "ID_PEOPLE")
+    private List<Form> formList = new ArrayList<>();
 }
