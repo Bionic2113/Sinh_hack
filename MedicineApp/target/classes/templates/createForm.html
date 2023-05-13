@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 align="center">Create new Form</h1>
+
+<table class="table">
+    <tr>
+        <th>Название пункта</th>
+        <th>Значение</th>
+    </tr>
+    <tr th:each="field, state : ${fields}">
+        <td th:utext="${field.getFieldName}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
