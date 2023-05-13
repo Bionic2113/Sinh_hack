@@ -1,6 +1,7 @@
 package application.model;
 
 import application.enums.DataType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,7 +21,7 @@ public class AdditionalField {
     private String fieldName;
 
     @Column(name = "DATA_TYPE")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private DataType dataType;
 
     @OneToMany

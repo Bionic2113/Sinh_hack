@@ -25,6 +25,7 @@
         <th>Дата рождения</th>
         <th>Пол</th>
         <th>Действие</th>
+        <th></th>
     </tr>
     <tr th:each="form, state : ${forms}">
         <td th:utext="${form.getDate}">Дата</td>
@@ -40,6 +41,12 @@
 
             <form th:action="@{/form/update/{id}(id=${form.getIdForm()})}" method="get">
                 <button class="btn btn-primary" type="submit">Обновить</button>
+            </form>
+        </td>
+
+        <td>
+            <form th:action="@{/form/{id}(id=${form.getIdForm()})}" method="get">
+                <button class="btn btn-primary" type="submit">Открыть анкету</button>
             </form>
         </td>
     </tr>

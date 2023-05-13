@@ -20,6 +20,7 @@ Persons page
         <th>Дата рождения</th>
         <th>Пол</th>
         <th>Действие</th>
+        <th>Анкеты</th>
     </tr>
     <tr th:each="person, state : ${persons}">
         <td th:utext="${person.getFirstname()}">Имя</td>
@@ -34,6 +35,11 @@ Persons page
 
             <form th:action="@{/person/update/{id}(id=${person.getIdPeople()})}" method="get">
                 <button class="btn btn-primary" type="submit">Обновить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/forms/create/{id}(id=${person.getIdPeople()})}" method="get">
+                <button class="btn btn-primary" type="submit">Создать анкету</button>
             </form>
         </td>
     </tr>
