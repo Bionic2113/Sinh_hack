@@ -1,9 +1,10 @@
 package application.model;
 
+import application.repository.PersonRepo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -12,8 +13,6 @@ import java.util.List;
 @Entity
 @Table(name = "form")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Form {
     @Id
     @Column(name = "ID_FORM")
@@ -22,12 +21,16 @@ public class Form {
     @Column(name = "DATE")
     private Date date;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_FORM", nullable = false)
     private List<AdditionalFieldValues> values = new ArrayList<>();
 
-
     @ManyToOne
     @JoinColumn(name = "ID_PEOPLE")
     private Person person;
+
+//    @Column(name = "ID_PEOPLE")
+//    private int idPeople;
+
 }

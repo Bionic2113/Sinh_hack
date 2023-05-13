@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FormRepo extends JpaRepository<Form, Integer> {
+    Form findByIdForm(int id);
 }
