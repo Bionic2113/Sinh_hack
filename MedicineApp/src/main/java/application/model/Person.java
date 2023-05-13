@@ -1,5 +1,6 @@
 package application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,6 +36,7 @@ public class Person {
     @Column(name = "SEX")
     private String sex;
 
+    @JsonIgnore
     @OneToMany
     @JoinColumn(name = "ID_PEOPLE")
     private List<Form> formList = new ArrayList<>();

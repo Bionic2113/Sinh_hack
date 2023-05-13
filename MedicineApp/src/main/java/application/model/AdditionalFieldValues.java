@@ -1,5 +1,6 @@
 package application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +23,12 @@ public class AdditionalFieldValues {
     @ManyToOne
     @JoinColumn(name = "ID_FIELD")
     private AdditionalField additionalField;
+
+    @Override
+    public String toString() {
+        return "AdditionalFieldValues{" +
+                "idValue=" + idValue +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
