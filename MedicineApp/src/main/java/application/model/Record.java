@@ -1,9 +1,11 @@
 package application.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "record")
+@Data
 public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,28 +17,4 @@ public class Record {
 
     @Column(name = "ID_PEOPLE")
     private int idPeople;
-
-    public int getIdRecord() {
-        return idRecord;
-    }
-
-    public void setIdRecord(int idRecord) {
-        this.idRecord = idRecord;
-    }
-
-    public int getIdForm() {
-        return idForm;
-    }
-
-    public void setIdForm(int idForm) {
-        this.idForm = idForm;
-    }
-
-    public int getIdPeople() {
-        return idPeople;
-    }
-
-    public void setIdPeople(int idPeople) {
-        this.idPeople = idPeople;
-    }
 }
