@@ -1,9 +1,9 @@
 package application.controller;
 
 import application.model.Form;
-import application.model.People;
+import application.model.Person;
 import application.repository.FormRepo;
-import application.repository.PeopleRepo;
+import application.repository.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestRest {
 
     @Autowired
-    PeopleRepo peopleRepo;
+    PersonRepo peopleRepo;
 
     @Autowired
     FormRepo formRepo;
 
     @GetMapping("/people")
-    public People getPeople(){
+    public Person getPeople(){
         return peopleRepo.findById(1).orElseThrow();
     }
 

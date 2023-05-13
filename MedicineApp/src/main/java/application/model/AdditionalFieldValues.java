@@ -15,6 +15,6 @@ public class AdditionalFieldValues {
     @Column(name = "VALUE")
     private String value;
 
-    @Column(name = "ID_FIELD")
-    private int idField;
+    @OneToOne
+    AdditionalField additionalField;
 }
