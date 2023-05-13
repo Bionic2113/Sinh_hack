@@ -22,4 +22,8 @@ public class Form {
     @JoinColumn(name = "ID_FORM", nullable = false)
     private List<AdditionalFieldValues> values = new ArrayList<>();
 
+
+    @ManyToOne
+    @JoinColumn(name = "ID_PEOPLE")
+    private Person person;
 }
