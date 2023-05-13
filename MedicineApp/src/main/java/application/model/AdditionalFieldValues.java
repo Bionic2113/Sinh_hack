@@ -24,11 +24,12 @@ public class AdditionalFieldValues {
     @JoinColumn(name = "ID_FIELD")
     private AdditionalField additionalField;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_FORM")
+    private Form form;
+
     @Override
     public String toString() {
-        return "AdditionalFieldValues{" +
-                "idValue=" + idValue +
-                ", value='" + value + '\'' +
-                '}';
+        return value;
     }
 }

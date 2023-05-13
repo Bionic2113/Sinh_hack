@@ -23,7 +23,7 @@ public class Form {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_FORM", nullable = false)
+    @JoinColumn(name = "ID_FORM")
     private List<AdditionalFieldValues> values = new ArrayList<>();
 
     @ManyToOne

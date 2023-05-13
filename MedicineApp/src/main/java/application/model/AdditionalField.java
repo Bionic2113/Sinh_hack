@@ -31,4 +31,11 @@ public class AdditionalField {
     @OneToMany
     @JoinColumn(name = "ID_FIELD")
     private List<AdditionalFieldValues> valuesList = new ArrayList<>();
+
+    public AdditionalFieldValues getValue(int id){
+        for (int i = 0; i < valuesList.size(); i++) {
+            if(valuesList.get(i).getForm().getIdForm()==id) return valuesList.get(i);
+        }
+        return null;
+    }
 }

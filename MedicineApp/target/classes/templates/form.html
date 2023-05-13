@@ -34,7 +34,7 @@
 
         <tr th:each="field, state : ${fields}">
             <td th:text="${field.getFieldName}"></td>
-            <td th:text="${field.valuesList}"></td>
+            <td th:text="${field.getValue(form.idForm)}"></td>
         </tr>
     </table>
 </body>
