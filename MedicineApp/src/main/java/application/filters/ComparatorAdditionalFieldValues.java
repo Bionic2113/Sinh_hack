@@ -31,9 +31,11 @@ public class ComparatorAdditionalFieldValues implements Comparator<AdditionalFie
     private int compareDouble(Double o1, Double o2){
         return o1.compareTo(o2);
     }
+
     private int compareInteger(Integer o1, Integer o2){
         return o1.compareTo(o2);
     }
+
     private int compareString(char[] o1, char[] o2){
         var end = Math.min(o1.length, o2.length);
         for (int i = 0; i < end; i++){
