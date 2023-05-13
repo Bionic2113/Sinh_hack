@@ -7,4 +7,4 @@
 /dataSources/
 /dataSources.local.xml
 # Not copy MySQL pass
-./src/main/resources/application.properties
+/src/main/resources/application.properties

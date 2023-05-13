@@ -2,11 +2,15 @@ package application.model;
 
 import application.enums.DataType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "additional_fields")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AdditionalField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

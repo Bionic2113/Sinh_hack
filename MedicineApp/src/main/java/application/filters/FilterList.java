@@ -1,5 +1,6 @@
 package application.filters;
 
+import application.compositions.AFVComposition;
 import application.model.AdditionalFieldValues;
 import application.model.Person;
 import application.repository.PersonRepo;
@@ -19,7 +20,7 @@ import java.util.List;
 @Setter
 public class FilterList {
 
-    private List<AdditionalFieldValues> additionalFieldValues;
+    private List<AFVComposition> afvCompositions;
     private List<Person> people;
 
     @Autowired
@@ -27,8 +28,8 @@ public class FilterList {
     @Autowired
     PersonService personService;
 
-    public FilterList(List<AdditionalFieldValues> additionalFieldValues, List<Person> people){
-        this.additionalFieldValues = additionalFieldValues;
+    public FilterList(List<AFVComposition> afvCompositions, List<Person> people){
+        this.afvCompositions = afvCompositions;
         this.people = people;
     }
 
@@ -36,7 +37,7 @@ public class FilterList {
         if(people.isEmpty()){
             people = personRepo.findAll();
         }
-        for (AdditionalFieldValues fieldValue : additionalFieldValues){
+        for (AFVComposition fieldValue : afvCompositions){
             people = personService.findInAll(fieldValue, people);
         }
         return people;
