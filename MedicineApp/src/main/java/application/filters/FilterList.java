@@ -33,7 +33,7 @@ public class FilterList {
         this.people = people;
     }
 
-    public List<Person> sort(){
+    public List<Person> filter(){
         if(people.isEmpty()){
             people = personRepo.findAll();
         }
