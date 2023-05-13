@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "additional_fields")
 @Data
@@ -23,4 +26,8 @@ public class AdditionalField {
     @Column(name = "DATA_TYPE")
     @Enumerated
     private DataType dataType;
+
+    @OneToMany
+    @JoinColumn(name = "ID_FIELD")
+    private List<AdditionalFieldValues> valuesList = new ArrayList<>();
 }
