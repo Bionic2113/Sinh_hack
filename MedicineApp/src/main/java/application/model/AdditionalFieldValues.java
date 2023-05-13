@@ -15,6 +15,7 @@ public class AdditionalFieldValues {
     @Column(name = "VALUE")
     private String value;
 
-    @OneToOne
-    AdditionalField additionalField;
+    @ManyToOne
+    @JoinColumn(name = "ID_FIELD")
+    private AdditionalField additionalField;
 }
