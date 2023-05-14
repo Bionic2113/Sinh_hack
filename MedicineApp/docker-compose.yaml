@@ -1,0 +1,24 @@
+version: '3.5'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: java_jsp
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123
+    volumes:
+      - ./med_full.sql:/docker-entrypoint-initdb.d/init.sql
+
+  build: .
+    ports:
+    - "8080:8080"
+    depends_on:
+    - db
+    environment:
+     SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/medecine
+     SPRING_DATASOURCE_USERNAME: root
+     SPRING_DATASOURCE_PASSWORD: 123
+    volumes:
+      - ./med_full.sql:/docker-entrypoint-initdb.d/init.sql

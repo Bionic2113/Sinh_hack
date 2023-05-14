@@ -28,10 +28,16 @@ public class AdditionalFieldValues {
     @JoinColumn(name = "ID_FORM")
     private Form form;
 
+    public AdditionalFieldValues(String value, AdditionalField additionalField) {
+        this.value = value;
+        this.additionalField = additionalField;
+    }
     @Override
     public String toString() {
         return value;
     }
+    
+    
 
 
 }
