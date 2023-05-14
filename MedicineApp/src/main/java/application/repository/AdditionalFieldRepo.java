@@ -11,7 +11,9 @@ public interface AdditionalFieldRepo extends JpaRepository<AdditionalField, Inte
     AdditionalField findByIdField(int id);
 =======
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdditionalFieldRepo extends JpaRepository<AdditionalField, Integer> {
 >>>>>>> b2287e2 (adding concrete form page)
 }
