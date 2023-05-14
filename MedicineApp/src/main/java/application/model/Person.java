@@ -1,5 +1,6 @@
 package application.model;
 
+import application.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,8 +40,18 @@ public class Person {
     @Column(name = "MED_DOC")
     private int medDocument;
 
+    @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @JsonIgnore
     @OneToMany
     @JoinColumn(name = "ID_PEOPLE")
     private List<Form> formList = new ArrayList<>();
+
+    public void deleteForms(){
+        for (int i = 0; i < formList.size(); i++) {
+            formList.get(i).setStatus(Status.DELETED);
+        }
+    }
 }

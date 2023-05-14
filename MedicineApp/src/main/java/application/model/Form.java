@@ -1,5 +1,6 @@
 package application.model;
 
+import application.enums.Status;
 import application.repository.PersonRepo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -30,6 +31,10 @@ public class Form {
     @ManyToOne
     @JoinColumn(name = "ID_PEOPLE")
     private Person person;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Override
     public String toString() {

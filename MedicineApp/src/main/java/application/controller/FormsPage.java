@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.enums.Status;
 import application.model.AdditionalFieldValues;
 import application.model.Form;
 import application.model.Person;
@@ -42,7 +43,7 @@ public class FormsPage {
 
     @GetMapping("/forms")
     public String getFormsPage(Model model){
-        List<Form> formList = formRepo.findAll();
+        List<Form> formList = formRepo.findByStatus(Status.EXIST);
         model.addAttribute("forms", formList);
         return "forms.html";
     }
@@ -91,8 +92,33 @@ public class FormsPage {
                 i--;
             }
         }
+        form.setStatus(Status.EXIST);
         formRepo.save(form);
         return "redirect:/forms";
     }
 
+    @GetMapping("/forms/byPerson/{id}")
+    public String formsByPerson(@PathVariable int id, Model model){
+        Person person = personRepo.findByIdPeople(id);
+        List<Form> list = formRepo.findByPersonAndStatus(person, Status.EXIST);
+        model.addAttribute("forms", list);
+        return "personForms.html";
+    }
+
+    @PostMapping("/form/delete/{id}")
+    public String deleteForm(@PathVariable int id){
+        Form form = formRepo.findByIdForm(id);
+        form.setStatus(Status.DELETED);
+        formRepo.save(form);
+        return "redirect:/forms";
+    }
+
+    @PostMapping("/person/form/delete/{id}")
+    public String deletePersonForm(@PathVariable int id){
+        Form form = formRepo.findByIdForm(id);
+        int index = form.getPerson().getIdPeople();
+        form.setStatus(Status.DELETED);
+        formRepo.save(form);
+        return "redirect:/forms/byPerson/"+index+"?";
+    }
 }

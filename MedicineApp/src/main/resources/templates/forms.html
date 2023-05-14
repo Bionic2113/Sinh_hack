@@ -11,18 +11,22 @@
 </head>
 <body>
 <tr>
-    <td><a href="/">На домашнюю страницу </a></td>
-    <td><a href="/persons">Пациенты</a></td>
+    <div>
+        <button class="btn btn-primary" onclick="location.href='/'" type="button">Домашняя страница</button>
+        <button class="btn btn-secondary" onclick="location.href='/forms'" type="button">Анкеты</button>
+        <button class="btn btn-danger" onclick="location.href='/persons'" type="button">Пациенты</button>
+    </div>
 </tr>
 
 <h1 align="center">Анкеты</h1>
 
-<div align="center">
-    <a href="/forms/filter">Фильтрация</a>
-</div>
+<!--<div align="center">-->
+<!--    <a href="/forms/filter">Фильтрация</a>-->
+<!--</div>-->
 
 <table class="table">
     <tr>
+        <th></th>
         <th>Дата</th>
         <th>Фамилия</th>
         <th>Имя</th>
@@ -32,7 +36,41 @@
         <th>Действие</th>
         <th></th>
     </tr>
+
+    <tr>
+        <td></td>
+        <td>
+            <form th:action="@{/forms/byDate}" method="get">
+                <button class="btn btn-primary" type="submit">Сортировать</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/forms/byFirstname}" method="get">
+                <button class="btn btn-primary" type="submit">Сортировать</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/forms/byLastname}" method="get">
+                <button class="btn btn-primary" type="submit">Сортировать</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/forms/byFather}" method="get">
+                <button class="btn btn-primary" type="submit">Сортировать</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/forms/byBirthDate}" method="get">
+                <button class="btn btn-primary" type="submit">Сортировать</button>
+            </form>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
     <tr th:each="form, state : ${forms}">
+        <td></td>
         <td th:utext="${form.getDate}">Дата</td>
         <td th:utext="${form.getPerson().getLastname()}">Фамилия</td>
         <td th:utext="${form.getPerson().getFirstname()}">Имя</td>
@@ -41,15 +79,9 @@
         <td th:utext="${form.getPerson().getSex()}">Пол</td>
         <td>
             <form th:action="@{/form/delete/{id}(id=${form.getIdForm()})}" method="post">
-                <button class="btn btn-danger" type="submit">Удалить</button>
+                <button class="btn btn-danger" type="submit">Удалить анкету</button>
             </form>
 
-            <form th:action="@{/form/update/{id}(id=${form.getIdForm()})}" method="get">
-                <button class="btn btn-primary" type="submit">Обновить</button>
-            </form>
-        </td>
-
-        <td>
             <form th:action="@{/form/{id}(id=${form.getIdForm()})}" method="get">
                 <button class="btn btn-primary" type="submit">Открыть анкету</button>
             </form>

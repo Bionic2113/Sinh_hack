@@ -37,38 +37,6 @@
         <th></th>
     </tr>
 
-    <tr>
-        <td></td>
-        <td>
-            <form th:action="@{/forms/byDate}" method="get">
-                <button class="btn btn-primary" type="submit">Сортировать</button>
-            </form>
-        </td>
-        <td>
-            <form th:action="@{/forms/byFirstname}" method="get">
-                <button class="btn btn-primary" type="submit">Сортировать</button>
-            </form>
-        </td>
-        <td>
-            <form th:action="@{/forms/byLastname}" method="get">
-                <button class="btn btn-primary" type="submit">Сортировать</button>
-            </form>
-        </td>
-        <td>
-            <form th:action="@{/forms/byFather}" method="get">
-                <button class="btn btn-primary" type="submit">Сортировать</button>
-            </form>
-        </td>
-        <td>
-            <form th:action="@{/forms/byBirthDate}" method="get">
-                <button class="btn btn-primary" type="submit">Сортировать</button>
-            </form>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
     <tr th:each="form, state : ${forms}">
         <td></td>
         <td th:utext="${form.getDate}">Дата</td>
@@ -78,13 +46,14 @@
         <td th:utext="${form.getPerson().getBirthDate()}">Дата рождения</td>
         <td th:utext="${form.getPerson().getSex()}">Пол</td>
         <td>
-            <form th:action="@{/form/delete/{id}(id=${form.getIdForm()})}" method="post">
-                <button class="btn btn-danger" type="submit">Удалить анкету</button>
+            <form th:action="@{/person/form/delete/{id}(id=${form.getIdForm()})}" method="post">
+                <button class="btn btn-danger" type="submit">Удалить</button>
             </form>
-
             <form th:action="@{/form/{id}(id=${form.getIdForm()})}" method="get">
                 <button class="btn btn-primary" type="submit">Открыть анкету</button>
             </form>
+        </td>
+        <td>
         </td>
     </tr>
 </table>
