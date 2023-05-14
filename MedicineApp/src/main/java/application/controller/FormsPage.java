@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
@@ -93,6 +94,7 @@ public class FormsPage {
             }
         }
         form.setStatus(Status.EXIST);
+        form.setDate(LocalDate.now());
         formRepo.save(form);
         return "redirect:/forms";
     }

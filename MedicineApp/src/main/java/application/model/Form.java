@@ -6,8 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +22,9 @@ public class Form {
     @Column(name = "ID_FORM")
     private int idForm;
 
+    @CreatedDate
     @Column(name = "DATE")
-    private Date date;
+    private LocalDate date;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
