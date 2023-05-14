@@ -10,8 +10,15 @@
     <title>Title</title>
 </head>
 <body>
-Persons page
+<tr>
+    <td><a href="/">На домашнюю страницу</a></td>
+    <td><a href="/forms">Анкеты</a></td>
+</tr>
+<h1 align="center">Пациенты</h1>
 
+<div align="center">
+    <a href="/person/create">Создать нового пациента</a>
+</div>
 <table class="table">
     <tr>
         <th>Имя</th>
@@ -19,6 +26,7 @@ Persons page
         <th>Отчество</th>
         <th>Дата рождения</th>
         <th>Пол</th>
+        <th>Мед. Полис</th>
         <th>Действие</th>
         <th>Анкеты</th>
     </tr>
@@ -28,6 +36,7 @@ Persons page
         <td th:utext="${person.getFather()}">Отчество</td>
         <td th:utext="${person.getBirthDate()}">Дата рождения</td>
         <td th:utext="${person.getSex()}">Пол</td>
+        <td th:utext="${person.getMedDocument()}">Мед. Полис</td>
         <td>
             <form th:action="@{/person/delete/{id}(id=${person.getIdPeople()})}" method="post">
                 <button class="btn btn-danger" type="submit">Удалить</button>

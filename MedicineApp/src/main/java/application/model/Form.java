@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 public class Form {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_FORM")
     private int idForm;
 
@@ -30,7 +31,12 @@ public class Form {
     @JoinColumn(name = "ID_PEOPLE")
     private Person person;
 
-//    @Column(name = "ID_PEOPLE")
-//    private int idPeople;
-
+    @Override
+    public String toString() {
+        return "Form{" +
+                "idForm=" + idForm +
+                ", date=" + date +
+                ", values=" + values +
+                '}';
+    }
 }

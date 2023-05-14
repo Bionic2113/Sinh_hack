@@ -38,4 +38,11 @@ public class AdditionalField {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "AdditionalField{" +
+                "fieldName='" + fieldName + '\'' +
+                '}';
+    }
 }
