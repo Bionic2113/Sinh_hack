@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Select filters</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+</head>
+<body class="bg-dark">
+<style>
+    .column {
+        float: left;
+        width: 50%;
+    }
+</style>
+<div class="text-white">
+    <!--/*@thymesVar id="wrap" type="application.wrappers.AFVListWrapper"*/-->
+    <form th:method="POST" th:action="@{/testFilter}" th:object="${wrap}">
+        <div th:each="AFVC, itemStat: *{compositionList}">
+            <label><input type="hidden" th:field="*{compositionList[__${itemStat.index}__].additionalFieldValues.idValue}"></label>
+            <label><input type="hidden" th:field="*{compositionList[__${itemStat.index}__].additionalFieldValues.additionalField.fieldName}"></label>
+            <label><input type="hidden" th:field="*{compositionList[__${itemStat.index}__].additionalFieldValues.additionalField.dataType}"></label>
+            <label class="column form-label text-warning" th:text="*{compositionList[__${itemStat.index}__].additionalFieldValues.additionalField.fieldName}">
+            </label>
+            <label class="column form-label text-warning">
+                <div th:if="*{compositionList[__${itemStat.index}__].isNumber()}">
+                    <input type="text" th:value="*{compositionList[__${itemStat.index}__].additionalFieldValues.value}" th:id="'input1-' + ${itemStat.index}" pattern="[0-9]+(\.[0-9]+)?" />
+                    <input type="text" th:value="*{compositionList[__${itemStat.index}__].additionalFieldValues.value}" th:id="'input2-' + ${itemStat.index}" pattern="[0-9]+(\.[0-9]+)?"/>
+                    <input type="hidden" th:field="*{compositionList[__${itemStat.index}__].additionalFieldValues.value}" th:id="'result-' + ${itemStat.index}" readonly />
+                </div>
+
+                <div th:if="*{!compositionList[__${itemStat.index}__].isNumber()}">
+                    <input type="text" th:field="*{compositionList[__${itemStat.index}__].additionalFieldValues.value}" >
+                </div>
+            </label>
+        </div>
+        <input type="submit" value="Save" class="btn btn-outline-warning">
+    </form>
+    <script>
+        var inputs = document.querySelectorAll('input[type="text"]');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].addEventListener("input", updateResult);
+        }
+        function updateResult() {
+            var input1 = this.parentNode.querySelector('input[id^="input1-"]');
+            var input2 = this.parentNode.querySelector('input[id^="input2-"]');
+            var result = this.parentNode.querySelector('input[id^="result-"]');
+            if (input1 && input2 && result) {
+                result.value = input1.value + " - " + input2.value;
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>
