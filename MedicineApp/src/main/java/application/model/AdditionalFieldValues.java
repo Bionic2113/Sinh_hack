@@ -2,13 +2,12 @@ package application.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "additional_fields_values")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdditionalFieldValues {
@@ -24,24 +23,17 @@ public class AdditionalFieldValues {
     @JoinColumn(name = "ID_FIELD")
     private AdditionalField additionalField;
 
-<<<<<<< HEAD
-    @ManyToOne
-    @JoinColumn(name = "ID_FORM")
-    private Form form;
-
-    @Override
-    public String toString() {
-        return value;
+    public AdditionalFieldValues(String value, AdditionalField additionalField) {
+        this.value = value;
+        this.additionalField = additionalField;
     }
 
-
-=======
     @Override
     public String toString() {
         return "AdditionalFieldValues{" +
+                "доп поле: "+additionalField +
                 "idValue=" + idValue +
                 ", value='" + value + '\'' +
                 '}';
     }
->>>>>>> b2287e2 (adding concrete form page)
 }

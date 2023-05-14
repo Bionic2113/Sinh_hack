@@ -1,12 +1,12 @@
 package application.filters;
 
-import application.compositions.AFVComposition;
-import application.model.AdditionalFieldValues;
+import application.wrappers.AFVComposition;
 import application.model.Person;
 import application.repository.PersonRepo;
 import application.service.PersonService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -17,21 +17,28 @@ import java.util.List;
  * <a href="https://t.me/bionic2113">telegram<a>
  * @date 13.05.2023
  */
+@Service
 @Setter
 public class FilterList {
 
     private List<AFVComposition> afvCompositions;
     private List<Person> people;
 
-    @Autowired
-    PersonRepo personRepo;
-    @Autowired
-    PersonService personService;
+//    @Autowired
+    private final PersonRepo personRepo;
 
-    public FilterList(List<AFVComposition> afvCompositions, List<Person> people){
-        this.afvCompositions = afvCompositions;
-        this.people = people;
+    private final PersonService personService;
+
+    @Autowired
+    public FilterList(PersonRepo personRepo, PersonService personService) {
+        this.personRepo = personRepo;
+        this.personService = personService;
     }
+//    public FilterList(List<AFVComposition> afvCompositions, List<Person> people, PersonRepo personRepo){
+//        this.afvCompositions = afvCompositions;
+//        this.people = people;
+//        this.personRepo = personRepo;
+//    }
 
     public List<Person> filter(){
         if(people.isEmpty()){

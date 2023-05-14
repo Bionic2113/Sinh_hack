@@ -3,6 +3,8 @@ package application.filters;
 import application.model.AdditionalFieldValues;
 import application.model.Form;
 import application.model.Person;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
 
 import java.util.Comparator;
 import java.util.List;
@@ -14,10 +16,15 @@ import java.util.List;
  * <a href="https://t.me/bionic2113">telegram<a>
  * @date 13.05.2023
  */
+@Log4j2
 public class SortList {
 
-    private final List<Person> people;
-    private final AdditionalFieldValues additionalFieldValues;
+    private List<Person> people;
+    private AdditionalFieldValues additionalFieldValues;
+
+    public SortList(List<Person> people) {
+        this.people = people;
+    }
 
     public SortList(List<Person> people, AdditionalFieldValues additionalFieldValues) {
         this.people = people;
@@ -73,10 +80,12 @@ public class SortList {
     }
 
     public List<Person> sortByFather(){
-        return people
+        var p =  people
                 .stream()
                 .sorted(Comparator.comparing(Person::getFather))
                 .toList();
+        log.log(Level.INFO, "People is {}", p);
+        return p;
     }
 
     public List<Person> sortByBirthDate(){

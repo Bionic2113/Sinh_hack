@@ -1,14 +1,8 @@
 package application.model;
 
-<<<<<<< HEAD
-import application.enums.Status;
-=======
->>>>>>> b2287e2 (adding concrete form page)
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -16,7 +10,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "people")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person {
@@ -40,24 +35,21 @@ public class Person {
     @Column(name = "SEX")
     private String sex;
 
-<<<<<<< HEAD
-    @Column(name = "MED_DOC")
-    private int medDocument;
-
-    @Column(name = "STATUS")
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-=======
->>>>>>> b2287e2 (adding concrete form page)
     @JsonIgnore
     @OneToMany
     @JoinColumn(name = "ID_PEOPLE")
     private List<Form> formList = new ArrayList<>();
 
-    public void deleteForms(){
-        for (int i = 0; i < formList.size(); i++) {
-            formList.get(i).setStatus(Status.DELETED);
-        }
+    @Override
+    public String toString() {
+        return "Person{" +
+                "idPeople=" + idPeople +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", father='" + father + '\'' +
+                ", birthDate=" + birthDate +
+                ", sex='" + sex + '\'' +
+                ", formList=" + formList +
+                '}';
     }
 }
