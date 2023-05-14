@@ -19,7 +19,7 @@ public class FormSorting {
 
     @GetMapping("/forms/byDate")
     public String formsByDate(Model model){
-        List<Form> list = formRepo.findByStatus(Status.EXIST,Sort.by(Sort.Direction.ASC, "date"));
+        List<Form> list = formRepo.findByStatus(Status.EXIST,Sort.by(Sort.Direction.DESC, "date"));
         model.addAttribute("forms", list);
         return "forms.html";
     }
@@ -47,7 +47,7 @@ public class FormSorting {
 
     @GetMapping("/forms/byBirthDate")
     public String formsByBirthDate(Model model){
-        List<Form> list = formRepo.findByStatus(Status.EXIST,Sort.by(Sort.Direction.ASC, "person.birthDate"));
+        List<Form> list = formRepo.findByStatus(Status.EXIST,Sort.by(Sort.Direction.DESC, "person.birthDate"));
         model.addAttribute("forms", list);
         return "forms.html";
     }
