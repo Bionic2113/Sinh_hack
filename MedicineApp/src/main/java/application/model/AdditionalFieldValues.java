@@ -24,6 +24,7 @@ public class AdditionalFieldValues {
     @JoinColumn(name = "ID_FIELD")
     private AdditionalField additionalField;
 
+<<<<<<< HEAD
     @ManyToOne
     @JoinColumn(name = "ID_FORM")
     private Form form;
@@ -34,4 +35,13 @@ public class AdditionalFieldValues {
     }
 
 
+=======
+    @Override
+    public String toString() {
+        return "AdditionalFieldValues{" +
+                "idValue=" + idValue +
+                ", value='" + value + '\'' +
+                '}';
+    }
+>>>>>>> b2287e2 (adding concrete form page)
 }

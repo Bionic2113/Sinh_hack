@@ -1,6 +1,9 @@
 package application.model;
 
+<<<<<<< HEAD
 import application.enums.Status;
+=======
+>>>>>>> b2287e2 (adding concrete form page)
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,6 +40,7 @@ public class Person {
     @Column(name = "SEX")
     private String sex;
 
+<<<<<<< HEAD
     @Column(name = "MED_DOC")
     private int medDocument;
 
@@ -44,6 +48,8 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+=======
+>>>>>>> b2287e2 (adding concrete form page)
     @JsonIgnore
     @OneToMany
     @JoinColumn(name = "ID_PEOPLE")

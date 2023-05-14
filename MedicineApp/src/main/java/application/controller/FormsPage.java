@@ -12,9 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+=======
+import org.springframework.web.bind.annotation.PathVariable;
+>>>>>>> b2287e2 (adding concrete form page)
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -51,6 +55,7 @@ public class FormsPage {
 
     @GetMapping("/forms/create/{id}")
     public String getCreateFormPage(@PathVariable int id, Model model){
+<<<<<<< HEAD
         this.id = id;
         Form form = new Form();
 
@@ -61,6 +66,12 @@ public class FormsPage {
         }
 
         model.addAttribute("values", form.getValues());
+=======
+        Person person = personRepo.findByIdPeople(id);
+        Form form = new Form();
+        form.setPerson(person);
+
+>>>>>>> b2287e2 (adding concrete form page)
         model.addAttribute("form", form);
         model.addAttribute("fields", fieldRepo.findAll());
 
@@ -75,6 +86,7 @@ public class FormsPage {
         model.addAttribute("values", valuesRepo.findAll());
         return "form.html";
     }
+<<<<<<< HEAD
 
     @PostMapping("/form/create")
     public String createForm(@ModelAttribute("form") Form form){
@@ -123,4 +135,6 @@ public class FormsPage {
         formRepo.save(form);
         return "redirect:/forms/byPerson/"+index+"?";
     }
+=======
+>>>>>>> b2287e2 (adding concrete form page)
 }

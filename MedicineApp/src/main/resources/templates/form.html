@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<<<<<<< HEAD
 <tr>
     <td><a href="/">На домашнюю страницу </a></td>
     <td><a href="/persons">Пациенты </a></td>
@@ -12,6 +13,9 @@
 </tr>
 
 <h1 align="center">Анкета</h1>
+=======
+<h1 align="center">Form Page</h1>
+>>>>>>> b2287e2 (adding concrete form page)
     <table class="table">
         <tr>
             <td>Дата создания: </td>
@@ -37,6 +41,7 @@
             <td>Пол: </td>
             <td th:text="${form.person.getSex()}"></td>
         </tr>
+<<<<<<< HEAD
         <tr>
             <td>Мед. Полис: </td>
             <td th:text="${form.person.getMedDocument()}"></td>
@@ -45,6 +50,12 @@
         <tr th:each="field, state : ${fields}">
             <td th:text="${field.getFieldName}"></td>
             <td th:text="${field.getValue(form.idForm)}"></td>
+=======
+
+        <tr th:each="field, state : ${fields}">
+            <td th:text="${field.getFieldName}"></td>
+            <td th:text="${field.valuesList}"></td>
+>>>>>>> b2287e2 (adding concrete form page)
         </tr>
     </table>
 </body>
