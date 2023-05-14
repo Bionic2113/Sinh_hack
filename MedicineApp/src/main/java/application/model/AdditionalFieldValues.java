@@ -28,6 +28,10 @@ public class AdditionalFieldValues {
         this.additionalField = additionalField;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "ID_FORM")
+    private Form form;
+
     @Override
     public String toString() {
         return "AdditionalFieldValues{" +

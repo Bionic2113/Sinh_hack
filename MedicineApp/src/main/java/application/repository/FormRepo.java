@@ -12,10 +12,7 @@ import java.util.List;
 @Repository
 public interface FormRepo extends JpaRepository<Form, Integer> {
     Form findByIdForm(int id);
-<<<<<<< HEAD
     List<Form> findByPersonAndStatus(Person person, Status status);
     List<Form> findByStatus(Status status, Sort sort);
     List<Form> findByStatus(Status status);
-=======
->>>>>>> b2287e2 (adding concrete form page)
 }

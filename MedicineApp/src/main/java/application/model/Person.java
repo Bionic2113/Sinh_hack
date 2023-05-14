@@ -1,5 +1,6 @@
 package application.model;
 
+import application.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -39,6 +40,19 @@ public class Person {
     @OneToMany
     @JoinColumn(name = "ID_PEOPLE")
     private List<Form> formList = new ArrayList<>();
+
+    @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Column(name = "MED_DOC")
+    private int medDocument;
+
+    public void deleteForms(){
+        for (int i = 0; i < formList.size(); i++) {
+            formList.get(i).setStatus(Status.DELETED);
+        }
+    }
 
     @Override
     public String toString() {

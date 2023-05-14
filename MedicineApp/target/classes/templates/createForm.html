@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<<<<<<< HEAD
 <h1 align="center">Создание новой анкеты</h1>
 
     <form th:action="@{/form/create}" method="post" th:object="${form}">
@@ -28,6 +29,19 @@
 
         <button class="btn btn-primary" type="submit">Create</button>
     </form>
+=======
+<h1 align="center">Create new Form</h1>
+
+<table class="table">
+    <tr>
+        <th>Название пункта</th>
+        <th>Значение</th>
+    </tr>
+    <tr th:each="field, state : ${fields}">
+        <td th:utext="${field.getFieldName}"></td>
+    </tr>
+</table>
+>>>>>>> b2287e2 (adding concrete form page)
 
 </body>
 </html>

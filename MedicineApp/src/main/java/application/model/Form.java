@@ -1,14 +1,13 @@
 package application.model;
 
-import application.repository.PersonRepo;
+import application.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +21,11 @@ public class Form {
     private int idForm;
 
     @Column(name = "DATE")
-    private Date date;
+    private LocalDate date;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_FORM", nullable = false)
+    @JoinColumn(name = "ID_FORM")
     private List<AdditionalFieldValues> values = new ArrayList<>();
 
 
@@ -34,9 +33,9 @@ public class Form {
     @JoinColumn(name = "ID_PEOPLE")
     private Person person;
 
-//    @Column(name = "ID_PEOPLE")
-//    private int idPeople;
-
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Override
     public String toString() {
@@ -44,7 +43,6 @@ public class Form {
                 "idForm=" + idForm +
                 ", date=" + date +
                 ", values=" + values +
-//                ", person=" + person +
                 '}';
     }
 }

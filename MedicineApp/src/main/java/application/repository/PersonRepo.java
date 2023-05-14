@@ -10,9 +10,6 @@ import java.util.List;
 @Repository
 public interface PersonRepo extends JpaRepository<Person, Integer> {
     Person findByIdPeople(int id);
-<<<<<<< HEAD
     List<Person> findAllByStatus(Status status);
     List<Person> findAllByMedDocument(int doc);
-=======
->>>>>>> b2287e2 (adding concrete form page)
 }
