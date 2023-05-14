@@ -2,9 +2,7 @@ package application.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -12,7 +10,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "people")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person {
@@ -40,4 +39,17 @@ public class Person {
     @OneToMany
     @JoinColumn(name = "ID_PEOPLE")
     private List<Form> formList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "idPeople=" + idPeople +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", father='" + father + '\'' +
+                ", birthDate=" + birthDate +
+                ", sex='" + sex + '\'' +
+                ", formList=" + formList +
+                '}';
+    }
 }

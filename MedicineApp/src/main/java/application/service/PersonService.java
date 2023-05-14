@@ -1,15 +1,16 @@
 package application.service;
 
-import application.compositions.AFVComposition;
 import application.enums.DataType;
 import application.model.AdditionalFieldValues;
 import application.model.Form;
 import application.model.Person;
+import application.wrappers.AFVComposition;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <h3>MedicineApp</h3>
@@ -19,33 +20,42 @@ import java.util.stream.Collectors;
  * @date 13.05.2023
  */
 @Service
+@Log4j2
 public class PersonService {
 
     private AFVComposition afvCompositions;
 
     public List<Person> findInAll(AFVComposition afvCompositions, List<Person> people){
+        log.log(Level.INFO,"People start is {}", people);
         this.afvCompositions = afvCompositions;
-        return people
+        var p = people
                 .stream()
-                .peek(b -> b.setFormList(findInPerson(b.getFormList())))
+                .map(person -> {
+                    List<Form> updatedFormList = findInPerson(person.getFormList());
+                    person.setFormList(updatedFormList);
+                    return person;
+                    })
+                .filter(f -> !f.getFormList().isEmpty())
                 .toList();
+        log.log(Level.INFO,"People finally list is {}",p);
+       return p;
     }
 
     private List<Form> findInPerson(List<Form> formList){
-        return formList
+        var p = formList
                 .stream()
-                .filter(form -> form
-                        .getValues()
-                        .contains(afvCompositions.getAdditionalFieldValues()))
-                .peek(form -> form.setValues(getValues(form.getValues())))
+                .filter(d -> findValues(d.getValues()))
                 .toList();
+        log.log(Level.INFO, "Forms finally is {}", p);
+        return p;
     }
 
-    private List<AdditionalFieldValues> getValues(List<AdditionalFieldValues> fieldValuesList){
-        return fieldValuesList
+    private boolean findValues(List<AdditionalFieldValues> fieldValuesList){
+        var p=  fieldValuesList
                 .stream()
-                .filter(this::valueIsValid)
-                .collect(Collectors.toList());
+                .anyMatch(this::valueIsValid);
+        log.log(Level.INFO,"AddFields finally is {}", p);
+        return p;
     }
 
     private boolean valueIsValid(AdditionalFieldValues additionalFieldValues){
@@ -57,20 +67,14 @@ public class PersonService {
                             .getValue()
                     );
         }
-        return afvCompositions
-                .isDiapason()
-                ? IsContains(afvCompositions
+        return IsContains(afvCompositions
                         .getAdditionalFieldValues()
                         .getValue(),
-                additionalFieldValues.getValue())
-                : equalsValue(
-                Double.parseDouble(afvCompositions.getAdditionalFieldValues().getValue()),
-                Double.parseDouble(additionalFieldValues.getValue())
-        );
+                additionalFieldValues.getValue());
     }
 
     private boolean IsContains(String diapason, String value){
-        List<Double> doubleList = Arrays.stream(diapason.split(","))
+        List<Double> doubleList = Arrays.stream(diapason.split(" - "))
                                             .map(Double::parseDouble)
                                             .sorted()
                                             .toList();
@@ -79,8 +83,4 @@ public class PersonService {
         double double_value = Double.parseDouble(value);
         return min <= double_value && double_value <= max;
     }
-    private boolean equalsValue(Double d1, Double d2){
-        return d1.equals(d2);
-    }
-
 }

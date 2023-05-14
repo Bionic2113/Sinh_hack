@@ -2,13 +2,12 @@ package application.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "additional_fields_values")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdditionalFieldValues {
@@ -24,9 +23,15 @@ public class AdditionalFieldValues {
     @JoinColumn(name = "ID_FIELD")
     private AdditionalField additionalField;
 
+    public AdditionalFieldValues(String value, AdditionalField additionalField) {
+        this.value = value;
+        this.additionalField = additionalField;
+    }
+
     @Override
     public String toString() {
         return "AdditionalFieldValues{" +
+                "доп поле: "+additionalField +
                 "idValue=" + idValue +
                 ", value='" + value + '\'' +
                 '}';

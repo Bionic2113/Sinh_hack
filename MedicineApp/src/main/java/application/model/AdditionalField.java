@@ -3,16 +3,15 @@ package application.model;
 import application.enums.DataType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "additional_fields")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdditionalField {
@@ -28,7 +27,18 @@ public class AdditionalField {
     @Enumerated(EnumType.STRING)
     private DataType dataType;
 
+    @JsonIgnore
     @OneToMany
     @JoinColumn(name = "ID_FIELD")
     private List<AdditionalFieldValues> valuesList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "AdditionalField{" +
+                "idField=" + idField +
+                ", fieldName='" + fieldName + '\'' +
+                ", dataType=" + dataType +
+//                ", valuesList=" + valuesList +
+                '}';
+    }
 }
