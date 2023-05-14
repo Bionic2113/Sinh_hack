@@ -23,10 +23,7 @@ public class FilterList {
 
     private List<AFVComposition> afvCompositions;
     private List<Person> people;
-
-//    @Autowired
     private final PersonRepo personRepo;
-
     private final PersonService personService;
 
     @Autowired
@@ -34,15 +31,13 @@ public class FilterList {
         this.personRepo = personRepo;
         this.personService = personService;
     }
-//    public FilterList(List<AFVComposition> afvCompositions, List<Person> people, PersonRepo personRepo){
-//        this.afvCompositions = afvCompositions;
-//        this.people = people;
-//        this.personRepo = personRepo;
-//    }
 
     public List<Person> filter(){
         if(people.isEmpty()){
             people = personRepo.findAll();
+        }
+        if (afvCompositions.isEmpty()){
+            return people;
         }
         for (AFVComposition fieldValue : afvCompositions){
             people = personService.findInAll(fieldValue, people);

@@ -64,7 +64,7 @@ public class TestFilterController {
         filterList.setAfvCompositions(afvListWrapper.getCompositionList());
         filterList.setPeople(new ArrayList<Person>());
         var list = new SortList(filterList.filter());
-        model.addAttribute("list", list.sortByFather());
+        model.addAttribute("list", list.sortByFirstName());
         return "PageAfterFilter";
     }
 
