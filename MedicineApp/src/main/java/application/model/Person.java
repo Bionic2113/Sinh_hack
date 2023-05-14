@@ -36,6 +36,9 @@ public class Person {
     @Column(name = "SEX")
     private String sex;
 
+    @Column(name = "MED_DOC")
+    private int medDocument;
+
     @JsonIgnore
     @OneToMany
     @JoinColumn(name = "ID_PEOPLE")

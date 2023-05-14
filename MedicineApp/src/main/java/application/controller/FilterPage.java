@@ -6,8 +6,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FilterPage {
-    @GetMapping("/forms/filter")
-    public String getFilterPage(){
-        return "formsFilter.html";
-    }
+
 }

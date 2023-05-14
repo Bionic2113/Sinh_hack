@@ -5,17 +5,29 @@
     <title>Title</title>
 </head>
 <body>
-<h1 align="center">Create new Form</h1>
+<h1 align="center">Создание новой анкеты</h1>
 
-<table class="table">
-    <tr>
-        <th>Название пункта</th>
-        <th>Значение</th>
-    </tr>
-    <tr th:each="field, state : ${fields}">
-        <td th:utext="${field.getFieldName}"></td>
-    </tr>
-</table>
+    <form th:action="@{/form/create}" method="post" th:object="${form}">
+
+        <table class="table">
+            <tr>
+                <th>Название пункта</th>
+                <th>Значение</th>
+            </tr>
+            <tr th:each="value, state : *{values}">
+                <td th:text="${fields[__${state.index}__].fieldName}"></td>
+                <td>
+                    <div class="form-group">
+                        <label></label>
+                        <input class="form-control" type="text" th:field="*{values[__${state.index}__].value}" /><br/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+        <button class="btn btn-primary" type="submit">Create</button>
+    </form>
 
 </body>
 </html>

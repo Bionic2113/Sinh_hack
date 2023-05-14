@@ -5,7 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<h1 align="center">Form Page</h1>
+<tr>
+    <td><a href="/">На домашнюю страницу </a></td>
+    <td><a href="/persons">Пациенты </a></td>
+    <td><a href="/forms">Анкеты</a></td>
+</tr>
+
+<h1 align="center">Анкета</h1>
     <table class="table">
         <tr>
             <td>Дата создания: </td>
@@ -30,6 +36,10 @@
         <tr>
             <td>Пол: </td>
             <td th:text="${form.person.getSex()}"></td>
+        </tr>
+        <tr>
+            <td>Мед. Полис: </td>
+            <td th:text="${form.person.getMedDocument()}"></td>
         </tr>
 
         <tr th:each="field, state : ${fields}">

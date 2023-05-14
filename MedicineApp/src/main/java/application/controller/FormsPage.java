@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.model.AdditionalFieldValues;
 import application.model.Form;
 import application.model.Person;
 import application.repository.AdditionalFieldRepo;
@@ -10,12 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class FormsPage {
+    int id;
+    Person person;
+
     @Autowired
     FormRepo formRepo;
 
@@ -37,10 +49,16 @@ public class FormsPage {
 
     @GetMapping("/forms/create/{id}")
     public String getCreateFormPage(@PathVariable int id, Model model){
-        Person person = personRepo.findByIdPeople(id);
+        this.id = id;
         Form form = new Form();
-        form.setPerson(person);
 
+        for (int i = 0; i < fieldRepo.findAll().size(); i++) {
+            AdditionalFieldValues value = new AdditionalFieldValues();
+            value.setForm(form);
+            form.getValues().add(value);
+        }
+
+        model.addAttribute("values", form.getValues());
         model.addAttribute("form", form);
         model.addAttribute("fields", fieldRepo.findAll());
 
@@ -55,4 +73,26 @@ public class FormsPage {
         model.addAttribute("values", valuesRepo.findAll());
         return "form.html";
     }
+
+    @PostMapping("/form/create")
+    public String createForm(@ModelAttribute("form") Form form){
+        for (int i = 0; i < form.getValues().size(); i++) {
+            form.getValues().get(i).setForm(form);
+            form.getValues().get(i).setAdditionalField(fieldRepo.findByIdField(i+1));
+        }
+        System.out.println(id);
+        Person person = personRepo.findByIdPeople(id);
+        form.setPerson(person);
+
+        for (int i = 0; i < form.getValues().size(); i++) {
+            String value = form.getValues().get(i).getValue();
+            if(value.isBlank()||value==""){
+                form.getValues().remove(i);
+                i--;
+            }
+        }
+        formRepo.save(form);
+        return "redirect:/forms";
+    }
+
 }
